@@ -1,0 +1,17 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "telegram-drive-bot"
+version = "1.0.0"
+description = "Telegram bot for uploading files to Google Drive using rclone"
+dependencies = [
+    "python-telegram-bot==20.7",
+    "aiohttp==3.9.1",
+    "requests==2.31.0",
+    "flask==2.3.3"
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
