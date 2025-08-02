@@ -1,0 +1,47 @@
+[nix]
+channel = "stable-22_11"
+
+[deployment]
+run = ["sh", "-c", "python bot.py"]
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+[env]
+PYTHONPATH = "${PYTHONPATH}:/home/runner/${REPL_SLUG}"
+
+[packager]
+language = "python3"
+ignoredPackages = ["unit_tests"]
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = true
+
+[languages.python3]
+pattern = "**/*.py"
+
+[languages.python3.languageServer]
+start = "pylsp"
+
+[debugger]
+support = true
+
+[debugger.interactive]
+transport = "localhost:5678"
+startCommand = ["python", "-m", "debugpy", "--listen", "5678", "--wait-for-client", "-m", "flask", "run", "--no-debugger", "--no-reload", "--host", "0.0.0.0", "--port", "5000"]
+
+[debugger.interactive.integratedAdapter]
+dapTcpAddress = "localhost:5678"
+
+[unitTest]
+language = "python3"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
+
+[auth]
+pageEnabled = false
+buttonEnabled = false
